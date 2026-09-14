@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - EduQuest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .logout {
+            background: #ef4444;
+            color: white !important;
+            padding: 9px 16px;
+            border-radius: 8px;
+        }
+
+        /* Profile Hero */
+        .profile-header {
+            margin: 35px 7% 25px;
+            padding: 35px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: white;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .profile-header h1 {
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        .profile-header p {
+            color: #e5e7eb;
+        }
+
+        /* Main */
+        .main {
+            margin: 0 7% 50px;
+        }
+
+        .section-title {
+            font-size: 27px;
+            margin: 35px 0 20px;
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .info-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .info-card h3 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .info-card p {
+            color: #6b7280;
+        }
+
+        /* Progress */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .progress-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .progress-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .level {
+            color: #4f46e5;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            border-radius: 20px;
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+        }
+
+        .badge-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .badge-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .badge-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .badge-card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            margin-top: 7px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .profile-header {
+                margin: 25px 5%;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .main {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🎓 EduQuest
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/courses">Courses</a>
+            <a href="/leaderboard">Leaderboard</a>
+            <a href="/badges">Badges</a>
+            <a href="/logout" class="logout">Logout</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Profile Header -->
+    <section class="profile-header">
+
+        <div class="avatar">
+            {{ user["name"][0]|upper }}
+        </div>
+
+        <div>
+            <h1>{{ user["name"] }}</h1>
+
+            <p>
+                📧 {{ user["email"] }}
+            </p>
+        </div>
+
+    </section>
+
+
+    <main class="main">
+
+        <!-- Statistics -->
+        <h2 class="section-title">
+            📊 My Statistics
+        </h2>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+
+                <div class="info-icon">⭐</div>
+
+                <h3>
+                    {{ user["score"] }}
+                </h3>
+
+                <p>Total Points</p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">🏆</div>
+
+                <h3>
+                    {{ badges|length }}
+                </h3>
+
+                <p>Badges Earned</p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">📚</div>
+
+                <h3>
+                    {{ progress|length }}
+                </h3>
+
+                <p>Courses Available</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Course Progress -->
+        <h2 class="section-title">
+            📚 Course Progress
+        </h2>
+
+        {% if progress %}
+
+        <div class="progress-grid">
+
+            {% for course in progress %}
+
+            <div class="progress-card">
+
+                <h3>
+                    {{ course["title"] }}
+                </h3>
+
+                <div class="level">
+                    {{ course["level"] }}
+                </div>
+
+                <div class="progress-top">
+                    <span>Progress</span>
+
+                    <span>
+                        {{ course["progress"] }}%
+                    </span>
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        style="width: {{ course['progress'] }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            No course progress available yet.
+        </div>
+
+        {% endif %}
+
+
+        <!-- Badges -->
+        <h2 class="section-title">
+            🏆 My Achievements
+        </h2>
+
+        {% if badges %}
+
+        <div class="badge-grid">
+
+            {% for badge in badges %}
+
+            <div class="badge-card">
+
+                <div class="badge-icon">
+                    {{ badge["icon"] }}
+                </div>
+
+                <h3>
+                    {{ badge["name"] }}
+                </h3>
+
+                <p>
+                    {{ badge["description"] }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            Complete quizzes to unlock your first badge! 🚀
+        </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>🎓 EduQuest</h3>
+
+        <p>
+            Smart Learning & Skill Development Platform
+        </p>
+
+        <p>
+            © 2026 EduQuest. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>

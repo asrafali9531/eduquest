@@ -1,0 +1,207 @@
+/* ================================
+   EDUQUEST GLOBAL STYLE
+   DARK MODE READY
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+    background: #ffffff;
+    color: #1f2937;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+/* ================================
+   CARDS
+================================ */
+
+.card,
+.course-card,
+.stat-card,
+.badge-card,
+.profile-card,
+.dashboard-card {
+    background: #ffffff;
+    color: #1f2937;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+/* ================================
+   INPUTS
+================================ */
+
+input,
+textarea,
+select {
+    background: #ffffff;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+/* ================================
+   LINKS
+================================ */
+
+a {
+    transition: color 0.3s ease;
+}
+
+
+/* ================================
+   DARK MODE
+================================ */
+
+body.dark-mode {
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+
+/* Navbar */
+
+body.dark-mode .navbar {
+    background: #111827;
+    color: #f9fafb;
+}
+
+
+/* Cards */
+
+body.dark-mode .card,
+body.dark-mode .course-card,
+body.dark-mode .stat-card,
+body.dark-mode .badge-card,
+body.dark-mode .profile-card,
+body.dark-mode .dashboard-card {
+    background: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+}
+
+
+/* Text */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #f8fafc;
+}
+
+body.dark-mode p {
+    color: #cbd5e1;
+}
+
+
+/* Inputs */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: #1e293b;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #94a3b8;
+}
+
+
+/* Tables */
+
+body.dark-mode table {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+body.dark-mode th {
+    background: #334155;
+    color: #ffffff;
+}
+
+body.dark-mode td {
+    border-color: #475569;
+}
+
+
+/* Buttons */
+
+body.dark-mode button {
+    color: #ffffff;
+}
+
+
+/* Footer */
+
+body.dark-mode footer {
+    background: #020617;
+    color: #cbd5e1;
+}
+
+
+/* ================================
+   DARK MODE TOGGLE BUTTON
+================================ */
+
+.theme-toggle {
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 7px 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.theme-toggle:hover {
+    background: rgba(127, 127, 127, 0.15);
+}
+
+
+/* ================================
+   SMOOTH TRANSITION
+================================ */
+
+body,
+.navbar,
+.card,
+.course-card,
+.stat-card,
+.badge-card,
+.profile-card,
+.dashboard-card,
+input,
+textarea,
+select,
+footer,
+table {
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+

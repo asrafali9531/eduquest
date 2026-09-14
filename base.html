@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>EduQuest | Smart Learning Platform</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <!-- Logo -->
+
+        <a href="{{ url_for('index') }}"
+           class="logo">
+
+            <span class="logo-icon">🎓</span>
+
+            <span>EduQuest</span>
+
+        </a>
+
+
+        <!-- Navigation -->
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('index') }}">
+                🏠 Home
+            </a>
+
+            <a href="{{ url_for('courses') }}">
+                📚 Courses
+            </a>
+
+            <a href="{{ url_for('leaderboard') }}">
+                🏆 Leaderboard
+            </a>
+
+            <a href="{{ url_for('badges') }}">
+                🏅 Badges
+            </a>
+
+
+            {% if session.get('user_id') %}
+
+                <a href="{{ url_for('dashboard') }}">
+                    👤 Dashboard
+                </a>
+
+                <a href="{{ url_for('logout') }}"
+                   class="logout-link">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+                <a href="{{ url_for('register') }}"
+                   class="register-link">
+                    Get Started
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= FLASH MESSAGES ================= -->
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <p>✓ {{ message }}</p>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            🎓 EduQuest
+        </div>
+
+        <p>
+            Smart Learning • Skill Development • Gamified Education
+        </p>
+
+        <span>
+            © 2026 EduQuest. All rights reserved.
+        </span>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

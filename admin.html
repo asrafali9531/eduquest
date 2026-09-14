@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - EduQuest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #6d28d9;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .admin-label {
+            background: #f3e8ff;
+            color: #6d28d9;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .logout {
+            margin-left: 15px;
+            background: #ef4444;
+            color: white;
+            text-decoration: none;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #dc2626;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 55px 6%;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            opacity: 0.9;
+            font-size: 17px;
+        }
+
+        /* Container */
+        .container {
+            width: 88%;
+            max-width: 1250px;
+            margin: 40px auto;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .stat-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            background: #f3e8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+        }
+
+        .stat-info h3 {
+            font-size: 27px;
+            color: #111827;
+        }
+
+        .stat-info p {
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        /* Management */
+        .section-title {
+            margin-bottom: 22px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            color: #111827;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .management-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .management-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.11);
+        }
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            background: #ede9fe;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .management-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .management-card p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #6d28d9;
+            color: white;
+            padding: 11px 19px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #5b21b6;
+        }
+
+        .btn.secondary {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .btn.secondary:hover {
+            background: #e0e7ff;
+        }
+
+        /* Quick actions */
+        .quick-actions {
+            margin-top: 40px;
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .quick-actions h2 {
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+
+        footer span {
+            color: #a78bfa;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .navbar {
+                padding: 14px 5%;
+            }
+
+            .admin-label {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+                width: 92%;
+            }
+
+            .hero {
+                padding: 40px 5%;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .management-card {
+                padding: 23px;
+            }
+
+            .logout {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🎓 EduQuest
+        </div>
+
+        <div>
+            <span class="admin-label">
+                🛡️ Administrator
+            </span>
+
+            <a href="/admin/logout" class="logout">
+                Logout
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <h1>Admin Dashboard 👋</h1>
+
+        <p>
+            Manage EduQuest users, courses, questions and learning content.
+        </p>
+
+    </section>
+
+
+    <!-- Main -->
+    <div class="container">
+
+        <!-- Stats -->
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👨‍🎓
+                </div>
+
+                <div class="stat-info">
+                    <h3>{{ users|length }}</h3>
+                    <p>Total Users</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+                <div class="stat-info">
+                    <h3>{{ courses|length }}</h3>
+                    <p>Total Courses</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ❓
+                </div>
+
+                <div class="stat-info">
+                    <h3>{{ questions|length }}</h3>
+                    <p>Total Questions</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Management -->
+        <div class="section-title">
+
+            <h2>⚙️ Management Center</h2>
+
+            <p>
+                Control and manage your EduQuest platform.
+            </p>
+
+        </div>
+
+
+        <div class="management-grid">
+
+            <!-- Users -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    👥
+                </div>
+
+                <h3>User Management</h3>
+
+                <p>
+                    View registered students and monitor their scores and learning activity.
+                </p>
+
+                <a href="/admin/users" class="btn">
+                    Manage Users →
+                </a>
+
+            </div>
+
+
+            <!-- Courses -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    📚
+                </div>
+
+                <h3>Course Management</h3>
+
+                <p>
+                    Add, edit and delete courses from the EduQuest learning platform.
+                </p>
+
+                <a href="/admin/courses" class="btn">
+                    Manage Courses →
+                </a>
+
+            </div>
+
+
+            <!-- Questions -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    🧠
+                </div>
+
+                <h3>Question Management</h3>
+
+                <p>
+                    Create and manage quiz questions for different courses.
+                </p>
+
+                <a href="/admin/questions" class="btn">
+                    Manage Questions →
+                </a>
+
+            </div>
+
+
+            <!-- Student View -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    🌐
+                </div>
+
+                <h3>Student Platform</h3>
+
+                <p>
+                    Open the main EduQuest platform and view the student experience.
+                </p>
+
+                <a href="/" class="btn secondary">
+                    Open Platform →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+
+            <h2>⚡ Quick Actions</h2>
+
+            <div class="action-buttons">
+
+                <a href="/admin/courses/add" class="btn">
+                    + Add Course
+                </a>
+
+                <a href="/admin/questions/add" class="btn">
+                    + Add Question
+                </a>
+
+                <a href="/admin/users" class="btn secondary">
+                    👥 View Users
+                </a>
+
+                <a href="/" class="btn secondary">
+                    🏠 Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        © 2026 <span>EduQuest</span> — Admin Control Center
+
+    </footer>
+
+</body>
+</html>

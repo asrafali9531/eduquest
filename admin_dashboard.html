@@ -1,0 +1,329 @@
+```html
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <p class="welcome-text">
+                🔐 EduQuest Administration
+            </p>
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <p class="dashboard-subtitle">
+                Manage your complete EduQuest learning platform.
+            </p>
+
+        </div>
+
+
+        <div class="profile-circle">
+            ⚙️
+        </div>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="dashboard-grid">
+
+
+        <div class="dashboard-card">
+
+            <div class="card-icon">
+                👨‍🎓
+            </div>
+
+            <div>
+
+                <p>
+                    Total Students
+                </p>
+
+                <h2>
+                    {{ users_count }}
+                </h2>
+
+                <small>
+                    Registered learners
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <div>
+
+                <p>
+                    Total Courses
+                </p>
+
+                <h2>
+                    {{ courses_count }}
+                </h2>
+
+                <small>
+                    Learning courses
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div class="card-icon">
+                ❓
+            </div>
+
+            <div>
+
+                <p>
+                    Total Questions
+                </p>
+
+                <h2>
+                    {{ questions_count }}
+                </h2>
+
+                <small>
+                    Quiz questions
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div class="card-icon">
+                🏅
+            </div>
+
+            <div>
+
+                <p>
+                    Total Badges
+                </p>
+
+                <h2>
+                    {{ badges_count }}
+                </h2>
+
+                <small>
+                    Achievements
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN CONTROLS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-title">
+
+            <h2>
+                ⚡ Admin Controls
+            </h2>
+
+            <p>
+                Manage every part of your EduQuest platform.
+            </p>
+
+        </div>
+
+
+        <div class="quick-grid">
+
+
+            <!-- STUDENTS -->
+
+            <a
+                href="{{ url_for('admin_users') }}"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    👨‍🎓
+                </div>
+
+                <h3>
+                    Students
+                </h3>
+
+                <p>
+                    View registered students and monitor their scores.
+                </p>
+
+                <span>
+                    Manage Students →
+                </span>
+
+            </a>
+
+
+
+            <!-- COURSES -->
+
+            <a
+                href="{{ url_for('admin_courses') }}"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Courses
+                </h3>
+
+                <p>
+                    Add, edit and delete learning courses.
+                </p>
+
+                <span>
+                    Manage Courses →
+                </span>
+
+            </a>
+
+
+
+            <!-- QUESTIONS -->
+
+            <a
+                href="{{ url_for('admin_questions') }}"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    ❓
+                </div>
+
+                <h3>
+                    Quiz Questions
+                </h3>
+
+                <p>
+                    Create, edit and delete quiz questions.
+                </p>
+
+                <span>
+                    Manage Questions →
+                </span>
+
+            </a>
+
+
+
+            <!-- LOGOUT -->
+
+            <a
+                href="{{ url_for('admin_logout') }}"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    🚪
+                </div>
+
+                <h3>
+                    Logout
+                </h3>
+
+                <p>
+                    Securely exit the administrator panel.
+                </p>
+
+                <span>
+                    Logout →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- PLATFORM STATUS -->
+
+    <div
+        style="
+            margin-top:40px;
+            padding:25px;
+            border-radius:20px;
+            background:rgba(255,255,255,0.75);
+            backdrop-filter:blur(12px);
+            box-shadow:0 15px 40px rgba(0,0,0,0.08);
+            text-align:center;
+        "
+    >
+
+        <div
+            style="
+                font-size:35px;
+                margin-bottom:10px;
+            "
+        >
+            🚀
+        </div>
+
+        <h2>
+            EduQuest Platform
+        </h2>
+
+        <p>
+            Your learning platform is running successfully.
+        </p>
+
+        <span
+            style="
+                display:inline-block;
+                margin-top:10px;
+                padding:8px 16px;
+                border-radius:20px;
+                background:#dcfce7;
+                color:#166534;
+                font-weight:600;
+            "
+        >
+            ● System Online
+        </span>
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+```

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Questions - EduQuest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #6d28d9;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #f3e8ff;
+            color: #6d28d9;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout {
+            text-decoration: none;
+            background: #ef4444;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #dc2626;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 50px 6%;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1250px;
+            margin: 40px auto;
+        }
+
+        /* Top */
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .title-area h2 {
+            font-size: 27px;
+            color: #111827;
+        }
+
+        .title-area p {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .add-btn {
+            text-decoration: none;
+            background: #6d28d9;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .add-btn:hover {
+            background: #5b21b6;
+        }
+
+        /* Search */
+        .search-box {
+            background: white;
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #7c3aed;
+        }
+
+        /* Questions */
+        .question-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .question-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+        }
+
+        .question-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .question-number {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .course-badge {
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111827;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        /* Options */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+            padding: 12px 14px;
+            color: #4b5563;
+        }
+
+        .option.correct {
+            background: #dcfce7;
+            border-color: #86efac;
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 18px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .edit {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .edit:hover {
+            background: #e0e7ff;
+        }
+
+        .delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .delete:hover {
+            background: #fecaca;
+        }
+
+        /* Empty */
+        .empty {
+            background: white;
+            border-radius: 18px;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+
+        footer span {
+            color: #a78bfa;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 14px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .back-btn {
+                display: none;
+            }
+
+            .hero {
+                padding: 40px 5%;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .top-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .add-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .question-top {
+                flex-direction: column;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <a href="/admin" class="logo">
+            🎓 EduQuest
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/admin" class="back-btn">
+                ← Dashboard
+            </a>
+
+            <a href="/admin/logout" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <h1>🧠 Manage Questions</h1>
+
+        <p>
+            Create and manage quiz questions for EduQuest courses.
+        </p>
+
+    </section>
+
+
+    <!-- Main -->
+    <div class="container">
+
+        <div class="top-section">
+
+            <div class="title-area">
+
+                <h2>Quiz Question Bank</h2>
+
+                <p>
+                    Manage questions and their correct answers.
+                </p>
+
+            </div>
+
+            <a href="/admin/questions/add" class="add-btn">
+                + Add New Question
+            </a>
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="questionSearch"
+                placeholder="🔍 Search questions or courses..."
+                onkeyup="searchQuestions()"
+            >
+
+        </div>
+
+
+        {% if questions %}
+
+        <div class="question-list">
+
+            {% for question in questions %}
+
+            <div class="question-card">
+
+                <div class="question-top">
+
+                    <span class="question-number">
+                        Question #{{ loop.index }}
+                    </span>
+
+                    <span class="course-badge">
+                        📚 {{ question['course_title'] }}
+                    </span>
+
+                </div>
+
+
+                <div class="question-text">
+                    {{ question['question'] }}
+                </div>
+
+
+                <div class="options">
+
+                    <div class="option {% if question['answer'] == 'A' %}correct{% endif %}">
+                        <strong>A.</strong> {{ question['option1'] }}
+                    </div>
+
+                    <div class="option {% if question['answer'] == 'B' %}correct{% endif %}">
+                        <strong>B.</strong> {{ question['option2'] }}
+                    </div>
+
+                    <div class="option {% if question['answer'] == 'C' %}correct{% endif %}">
+                        <strong>C.</strong> {{ question['option3'] }}
+                    </div>
+
+                    <div class="option {% if question['answer'] == 'D' %}correct{% endif %}">
+                        <strong>D.</strong> {{ question['option4'] }}
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <a
+                        href="/admin/questions/edit/{{ question['id'] }}"
+                        class="btn edit"
+                    >
+                        ✏️ Edit Question
+                    </a>
+
+                    <a
+                        href="/admin/questions/delete/{{ question['id'] }}"
+                        class="btn delete"
+                        onclick="return confirm('Are you sure you want to delete this question?');"
+                    >
+                        🗑️ Delete Question
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🧠
+            </div>
+
+            <h3>No Questions Found</h3>
+
+            <p>
+                Add your first quiz question to start building the question bank.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        © 2026 <span>EduQuest</span> — Admin Question Management
+
+    </footer>
+
+
+    <!-- Search Script -->
+    <script>
+
+        function searchQuestions() {
+
+            const input = document
+                .getElementById("questionSearch")
+                .value
+                .toLowerCase();
+
+            const cards = document
+                .querySelectorAll(".question-card");
+
+            cards.forEach(function(card) {
+
+                const text = card.innerText.toLowerCase();
+
+                if (text.includes(input)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>

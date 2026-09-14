@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ course["title"] }} Quiz | EduQuest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .logo span {
+            color: #111827;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        /* HEADER */
+
+        .quiz-header {
+            max-width: 900px;
+            margin: 45px auto 25px;
+            padding: 0 20px;
+        }
+
+        .quiz-header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        /* QUIZ CONTAINER */
+
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 0 20px 60px;
+        }
+
+        .question-card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 22px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .question-number {
+            color: #4f46e5;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .question {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* OPTIONS */
+
+        .option {
+            display: block;
+            margin: 12px 0;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option label {
+            display: block;
+            padding: 15px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fff;
+        }
+
+        .option label:hover {
+            border-color: #4f46e5;
+            background: #f5f3ff;
+        }
+
+        .option input:checked + label {
+            border-color: #4f46e5;
+            background: #eef2ff;
+            color: #3730a3;
+            font-weight: bold;
+        }
+
+        /* SUBMIT */
+
+        .submit-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 15px 40px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #3730a3;
+            transform: translateY(-2px);
+        }
+
+        /* NO QUESTIONS */
+
+        .empty {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111827;
+            color: #9ca3af;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .quiz-header h1 {
+                font-size: 27px;
+            }
+
+            .question-card {
+                padding: 20px;
+            }
+
+            .question {
+                font-size: 17px;
+            }
+
+            nav {
+                padding: 15px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            Edu<span>Quest</span>
+        </div>
+
+        <a href="{{ url_for('courses') }}" class="back-btn">
+            ← Back to Courses
+        </a>
+
+    </nav>
+
+
+    <!-- QUIZ HEADER -->
+
+    <div class="quiz-header">
+
+        <h1>{{ course["title"] }} Quiz</h1>
+
+        <p>
+            Test your knowledge and earn points.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="quiz-container">
+
+        {% if questions %}
+
+        <form
+            action="{{ url_for('submit_quiz', course_id=course_id) }}"
+            method="POST"
+        >
+
+            {% for question in questions %}
+
+            <div class="question-card">
+
+                <div class="question-number">
+                    Question {{ loop.index }}
+                </div>
+
+                <div class="question">
+                    {{ question["question"] }}
+                </div>
+
+
+                <!-- OPTION A -->
+
+                <div class="option">
+
+                    <input
+                        type="radio"
+                        id="q{{ question['id'] }}A"
+                        name="question_{{ question['id'] }}"
+                        value="A"
+                        required
+                    >
+
+                    <label for="q{{ question['id'] }}A">
+                        <strong>A.</strong>
+                        {{ question["option_a"] }}
+                    </label>
+
+                </div>
+
+
+                <!-- OPTION B -->
+
+                <div class="option">
+
+                    <input
+                        type="radio"
+                        id="q{{ question['id'] }}B"
+                        name="question_{{ question['id'] }}"
+                        value="B"
+                    >
+
+                    <label for="q{{ question['id'] }}B">
+                        <strong>B.</strong>
+                        {{ question["option_b"] }}
+                    </label>
+
+                </div>
+
+
+                <!-- OPTION C -->
+
+                <div class="option">
+
+                    <input
+                        type="radio"
+                        id="q{{ question['id'] }}C"
+                        name="question_{{ question['id'] }}"
+                        value="C"
+                    >
+
+                    <label for="q{{ question['id'] }}C">
+                        <strong>C.</strong>
+                        {{ question["option_c"] }}
+                    </label>
+
+                </div>
+
+
+                <!-- OPTION D -->
+
+                <div class="option">
+
+                    <input
+                        type="radio"
+                        id="q{{ question['id'] }}D"
+                        name="question_{{ question['id'] }}"
+                        value="D"
+                    >
+
+                    <label for="q{{ question['id'] }}D">
+                        <strong>D.</strong>
+                        {{ question["option_d"] }}
+                    </label>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+            <!-- SUBMIT BUTTON -->
+
+            <div class="submit-area">
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit Quiz →
+                </button>
+
+            </div>
+
+        </form>
+
+        {% else %}
+
+        <div class="empty">
+
+            <h2>No Questions Available</h2>
+
+            <p>
+                This course does not have any quiz questions yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 EduQuest. Learn. Practice. Grow.
+
+    </footer>
+
+</body>
+</html>

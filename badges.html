@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Badges - EduQuest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #6d28d9;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #6d28d9;
+        }
+
+        .logout {
+            background: #6d28d9;
+            color: white !important;
+            padding: 9px 17px;
+            border-radius: 8px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #6d28d9, #9333ea);
+            color: white;
+            padding: 60px 7%;
+            text-align: center;
+        }
+
+        .hero-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: 45px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+        }
+
+        /* Badge Grid */
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .badge-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .badge-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .badge-card.unlocked {
+            border-color: #8b5cf6;
+        }
+
+        .badge-card.locked {
+            opacity: 0.55;
+            filter: grayscale(0.6);
+        }
+
+        .badge-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #f3e8ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .badge-card h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .badge-card p {
+            color: #6b7280;
+            line-height: 1.6;
+            min-height: 50px;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .unlocked .status {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .locked .status {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        /* Empty */
+        .empty {
+            background: white;
+            padding: 50px 20px;
+            border-radius: 18px;
+            text-align: center;
+            color: #6b7280;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 70px;
+        }
+
+        footer span {
+            color: #a78bfa;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .badge-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar {
+                padding: 14px 5%;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .logout {
+                padding: 8px 12px;
+            }
+
+            .hero {
+                padding: 45px 5%;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                width: 90%;
+            }
+
+            .badge-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <a href="/dashboard" class="logo">
+            🎓 EduQuest
+        </a>
+
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/courses">Courses</a>
+            <a href="/leaderboard">Leaderboard</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout" class="logout">Logout</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <div class="hero-icon">🏆</div>
+
+        <h1>Your Achievements</h1>
+
+        <p>
+            Complete courses and quizzes to unlock amazing badges!
+        </p>
+
+    </section>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <div class="section-title">
+            <h2>🏅 Badge Collection</h2>
+            <p>Keep learning and unlock all the badges.</p>
+        </div>
+
+
+        {% if badges %}
+
+        <div class="badge-grid">
+
+            {% for badge in badges %}
+
+            <div class="badge-card {% if badge['unlocked'] %}unlocked{% else %}locked{% endif %}">
+
+                <div class="badge-icon">
+                    {{ badge['icon'] }}
+                </div>
+
+                <h3>
+                    {{ badge['name'] }}
+                </h3>
+
+                <p>
+                    {{ badge['description'] }}
+                </p>
+
+                {% if badge['unlocked'] %}
+
+                    <span class="status">
+                        ✓ Unlocked
+                    </span>
+
+                {% else %}
+
+                    <span class="status">
+                        🔒 Locked
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">🏅</div>
+
+            <h3>No badges available yet</h3>
+
+            <p>Start learning and complete quizzes to earn badges!</p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        © 2026 <span>EduQuest</span> — Learn. Practice. Achieve.
+    </footer>
+
+</body>
+</html>

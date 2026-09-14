@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Question - EduQuest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: white;
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            color: #6d28d9;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #f3e8ff;
+            color: #6d28d9;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout {
+            text-decoration: none;
+            background: #ef4444;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 45px 6%;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 45px auto;
+        }
+
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+        }
+
+        .form-title {
+            margin-bottom: 28px;
+        }
+
+        .form-title h2 {
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .form-title p {
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
+        }
+
+        .options-title {
+            margin: 30px 0 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .options-title h3 {
+            color: #374151;
+        }
+
+        .option-box {
+            display: grid;
+            grid-template-columns: 45px 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .option-label {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3e8ff;
+            color: #6d28d9;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .answer-box select {
+            margin-top: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            padding: 13px 20px;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: #6d28d9;
+            color: white;
+            flex: 1;
+        }
+
+        .submit-btn:hover {
+            background: #5b21b6;
+        }
+
+        .cancel-btn {
+            background: #f3f4f6;
+            color: #374151;
+            flex: 1;
+        }
+
+        .cancel-btn:hover {
+            background: #e5e7eb;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+
+        footer span {
+            color: #a78bfa;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 14px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .back-btn {
+                display: none;
+            }
+
+            .hero {
+                padding: 40px 5%;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .form-card {
+                padding: 24px;
+            }
+
+            .option-box {
+                grid-template-columns: 40px 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <a href="/admin" class="logo">
+            🎓 EduQuest
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/admin/questions" class="back-btn">
+                ← Questions
+            </a>
+
+            <a href="/admin/logout" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <h1>✏️ Edit Question</h1>
+
+        <p>
+            Update the quiz question and answer options.
+        </p>
+
+    </section>
+
+
+    <!-- Form -->
+    <div class="container">
+
+        <div class="form-card">
+
+            <div class="form-title">
+
+                <h2>Question Information</h2>
+
+                <p>
+                    Modify the question details below.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+                <!-- Course -->
+                <div class="form-group">
+
+                    <label for="course_id">
+                        Select Course
+                    </label>
+
+                    <select
+                        id="course_id"
+                        name="course_id"
+                        required
+                    >
+
+                        {% for course in courses %}
+
+                        <option
+                            value="{{ course['id'] }}"
+                            {% if course['id'] == question['course_id'] %}selected{% endif %}
+                        >
+                            {{ course['title'] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Question -->
+                <div class="form-group">
+
+                    <label for="question">
+                        Question
+                    </label>
+
+                    <textarea
+                        id="question"
+                        name="question"
+                        placeholder="Enter your question"
+                        required
+                    >{{ question['question'] }}</textarea>
+
+                </div>
+
+
+                <!-- Options -->
+                <div class="options-title">
+                    <h3>Answer Options</h3>
+                </div>
+
+
+                <!-- Option A -->
+                <div class="option-box">
+
+                    <div class="option-label">
+                        A
+                    </div>
+
+                    <input
+                        type="text"
+                        name="option1"
+                        value="{{ question['option1'] }}"
+                        placeholder="Option A"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Option B -->
+                <div class="option-box">
+
+                    <div class="option-label">
+                        B
+                    </div>
+
+                    <input
+                        type="text"
+                        name="option2"
+                        value="{{ question['option2'] }}"
+                        placeholder="Option B"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Option C -->
+                <div class="option-box">
+
+                    <div class="option-label">
+                        C
+                    </div>
+
+                    <input
+                        type="text"
+                        name="option3"
+                        value="{{ question['option3'] }}"
+                        placeholder="Option C"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Option D -->
+                <div class="option-box">
+
+                    <div class="option-label">
+                        D
+                    </div>
+
+                    <input
+                        type="text"
+                        name="option4"
+                        value="{{ question['option4'] }}"
+                        placeholder="Option D"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Correct Answer -->
+                <div class="answer-box">
+
+                    <label for="answer">
+                        ✓ Correct Answer
+                    </label>
+
+                    <select
+                        id="answer"
+                        name="answer"
+                        required
+                    >
+
+                        <option
+                            value="A"
+                            {% if question['answer'] == 'A' %}selected{% endif %}
+                        >
+                            A
+                        </option>
+
+                        <option
+                            value="B"
+                            {% if question['answer'] == 'B' %}selected{% endif %}
+                        >
+                            B
+                        </option>
+
+                        <option
+                            value="C"
+                            {% if question['answer'] == 'C' %}selected{% endif %}
+                        >
+                            C
+                        </option>
+
+                        <option
+                            value="D"
+                            {% if question['answer'] == 'D' %}selected{% endif %}
+                        >
+                            D
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="buttons">
+
+                    <a
+                        href="/admin/questions"
+                        class="btn cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn submit-btn"
+                    >
+                        ✓ Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        © 2026 <span>EduQuest</span> — Admin Question Management
+
+    </footer>
+
+</body>
+</html>
